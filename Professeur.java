@@ -1,6 +1,4 @@
-package model;
-
-import java.time.LocalDate;
+package sample;
 
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.ObjectProperty;
@@ -9,12 +7,16 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
+import java.lang.String;
+
+
+
 /* Model class
     pour professeur
  */
 public class Professeur {
     private final StringProperty email;
-    private final IntegerProperty motDePasse;
+    private final StringProperty motDePasse;
     private final IntegerProperty id;
     private final StringProperty nom;
     private final StringProperty prenom;
@@ -26,7 +28,7 @@ public class Professeur {
 
     // construtor without parameters
     public Professeur(){
-        this(0,null,0,null,null,null,null,null,null);
+        this(0,null, null,null,null,null,null,null,null);
     }
 
     /* constructor with parameters
@@ -37,9 +39,9 @@ public class Professeur {
     * @param prenom
     * @param specialite
      */
-    public Professeur(int id, String email, int motDePasse, String nom, String prenom, String specialite,Module module, Filliere filliere, Departement departement){
+    public Professeur(int id, String email, String motDePasse, String nom, String prenom, String specialite,Module module, Filliere filliere, Departement departement){
         this.email = new SimpleStringProperty(email);
-        this.motDePasse = new SimpleIntegerProperty(motDePasse);
+        this.motDePasse = new SimpleStringProperty(motDePasse);
         this.id = new SimpleIntegerProperty(id);
         this.nom = new SimpleStringProperty(nom);
         this.prenom = new SimpleStringProperty(prenom);
@@ -53,7 +55,7 @@ public class Professeur {
         return email.get();
     }
 
-    public int getMotDePasse(){
+    public String getMotDePasse(){
         return motDePasse.get();
     }
 
@@ -72,9 +74,9 @@ public class Professeur {
     public int getId(){
         return id.get();
     }
-
+    /*
     public String getModule(){
-        return module.get();
+        return module.getTitre();
     }
 
     public String getFilliere(){
@@ -83,7 +85,7 @@ public class Professeur {
 
     public String getDepratement(){
         return departement.get();
-    }
+    }*/
     // End getters
 
     // Start setters
@@ -91,7 +93,7 @@ public class Professeur {
         this.email.set(email);
     }
 
-    public void setMotDePasse(int motDePasse){
+    public void setMotDePasse(String motDePasse){
         this.motDePasse.set(motDePasse);
     }
 
@@ -129,7 +131,7 @@ public class Professeur {
         return email;
     }
 
-    public IntegerProperty motDePasseProperty(){
+    public StringProperty motDePasseProperty(){
         return motDePasse;
     }
 

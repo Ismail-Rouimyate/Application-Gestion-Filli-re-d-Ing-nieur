@@ -1,6 +1,11 @@
-package model;
+package sample;
+
+
+
 
 
 public class Module {
-    private String titre;
+
+
+
 }
