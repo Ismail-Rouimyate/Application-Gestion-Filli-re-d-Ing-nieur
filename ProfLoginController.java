@@ -1,11 +1,17 @@
 package sample;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+
+import java.io.IOException;
 
 
 public class ProfLoginController {
@@ -16,12 +22,18 @@ public class ProfLoginController {
     @FXML
     private Label erreur;
 
+    Stage primaryStage;
+
     // liste de professeurs en mode observable array list
     private ObservableList<Professeur> professeurData = FXCollections.observableArrayList();
+
+    Professeur exemple = new Professeur(1,"test","test","nom","prenom","specialite",null,null,null);
 
 
     private Stage profLoginStage;
     private boolean okClicked = false;
+
+
 
     /**
      * Initializes the controller class
@@ -43,10 +55,10 @@ public class ProfLoginController {
 
     /**
      * returns true if login clicked
-     * @return
+     * @return okClicked
      */
     public boolean isOkClicked(){
-        return isOkClicked();
+        return okClicked;
     }
 
     /**
@@ -71,7 +83,7 @@ public class ProfLoginController {
      */
      private boolean isInputValid(String email, String passe){
          // loops through the observable array list to find a match
-
+         professeurData.add(exemple);
          /*
          *pour tester la fonction de test
          Professeur newProf = new Professeur(1,"test","test","moi","moi","specialite",null,null,null);
@@ -89,7 +101,31 @@ public class ProfLoginController {
     *Opens prof menu
     */
     public void profAffichage(Professeur prof){
-        // TODO : créer une méthode pour ouvrir le menu du professeur
+        try{
+            //Load the fxml file
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(Main.class.getResource("ProfOverview.fxml"));
+            AnchorPane page = (AnchorPane) loader.load();
+
+            //Create dialog stage
+            Stage dialogStage = new Stage();
+            dialogStage.setTitle("Planing de : "+prof.getNom()+" "+prof.getPrenom());
+            dialogStage.initModality(Modality.APPLICATION_MODAL);
+            dialogStage.initOwner(primaryStage);
+            Scene scene = new Scene(page);
+            dialogStage.setScene(scene);
+
+            ProfOverviewController controller = loader.getController();
+            controller.setProfOverviewStage(dialogStage);
+
+            // Shows the dialog and waits until the user closes it
+            dialogStage.showAndWait();
+
+
+
+        }catch (IOException e){
+            e.printStackTrace();
+        }
     }
 
     public Professeur quelProf(String email){

@@ -10,6 +10,9 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+import java.sql.DriverManager;
+import java.sql.Connection;
+import java.sql.SQLException;
 
 public class Main extends Application {
 
@@ -102,13 +105,17 @@ public class Main extends Application {
 
     /**
      * Returns the main stage.
-     * @return
+     * @return primaryStage
      */
     public Stage getPrimaryStage() {
         return primaryStage;
     }
 
     public static void main(String[] args) {
+        OracleJDBC oracle = new OracleJDBC();
+        oracle.start();
         launch(args);
     }
+
+
 }
