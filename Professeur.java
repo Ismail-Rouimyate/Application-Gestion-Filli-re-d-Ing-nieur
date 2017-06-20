@@ -39,6 +39,19 @@ public class Professeur {
     * @param prenom
     * @param specialite
      */
+
+    public Professeur(String email, String motDePasse){
+        this.email = new SimpleStringProperty(email);
+        this.motDePasse = new SimpleStringProperty(motDePasse);
+        this.id = null;
+        this.nom = null;
+        this.prenom = null;
+        this.specialite = null;
+        this.module = null;
+        this.filliere = null;
+        this.departement = null;
+    }
+
     public Professeur(int id, String email, String motDePasse, String nom, String prenom, String specialite,Module module, Filliere filliere, Departement departement){
         this.email = new SimpleStringProperty(email);
         this.motDePasse = new SimpleStringProperty(motDePasse);

@@ -30,8 +30,14 @@ public class ProfLoginController {
     Professeur exemple = new Professeur(1,"test","test","nom","prenom","specialite",null,null,null);
 
 
+
     private Stage profLoginStage;
     private boolean okClicked = false;
+    private boolean isProfValide = false;
+
+    public void setIsProfValide(boolean what){
+        this.isProfValide = what;
+    }
 
 
 
@@ -66,7 +72,9 @@ public class ProfLoginController {
      */
     @FXML
     private void handleLogin(){
-        if (isInputValid(emailField.getText(),motDePasseField.getText())){
+        isInputValid(emailField.getText(),motDePasseField.getText());
+
+        if (isProfValide){
             profAffichage(quelProf(emailField.getText()));
             okClicked = true;
             profLoginStage.close();
@@ -79,22 +87,25 @@ public class ProfLoginController {
 
      /**
      * validates the user input
-     * returns true if valid
+     *
      */
-     private boolean isInputValid(String email, String passe){
+     private void isInputValid(String email, String passe){
          // loops through the observable array list to find a match
-         professeurData.add(exemple);
+         //professeurData.add(new Professeur("test", "test"));
          /*
-         *pour tester la fonction de test
+         *pour tester la fonction de test*/
          Professeur newProf = new Professeur(1,"test","test","moi","moi","specialite",null,null,null);
-         professeurData.add(newProf);*/
+         professeurData.add(newProf);
 
-         for(Professeur prof : professeurData){
-             if(prof.getEmail() == email && prof.getMotDePasse() == passe){
-                 return true;
+
+         professeurData.forEach(professeur -> {
+             if(professeur.getEmail().equals(email) && professeur.getMotDePasse().equals(passe) ){
+                 setIsProfValide(true);
              }
-         }
-         return false;
+             else{
+                 setIsProfValide(false);
+             }
+         });
      }
 
     /**
@@ -118,6 +129,7 @@ public class ProfLoginController {
             ProfOverviewController controller = loader.getController();
             controller.setProfOverviewStage(dialogStage);
 
+
             // Shows the dialog and waits until the user closes it
             dialogStage.showAndWait();
 
@@ -128,9 +140,9 @@ public class ProfLoginController {
         }
     }
 
-    public Professeur quelProf(String email){
+    private Professeur quelProf(String email){
         for(Professeur prof : professeurData){
-            if(prof.getEmail() == email){
+            if(prof.getEmail().equals(email)){
                 return prof;
             }
         }

@@ -27,7 +27,7 @@ public class OracleJDBC {
 
         try {
 
-            connection = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe", "SYSTEM", "system");
+            connection = DriverManager.getConnection("jdbc:oracle:thin:@//localhost:1521/xe", "SYSTEM", "system");
 
         } catch (SQLException e) {
 
@@ -41,6 +41,12 @@ public class OracleJDBC {
             System.out.println("You made it, take control your database now!");
         } else {
             System.out.println("Failed to make connection!");
+        }
+
+        try{
+            connection.close();
+        }catch (SQLException e){
+            e.printStackTrace();
         }
     }
 }

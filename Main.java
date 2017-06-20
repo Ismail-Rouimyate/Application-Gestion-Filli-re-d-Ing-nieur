@@ -112,8 +112,8 @@ public class Main extends Application {
     }
 
     public static void main(String[] args) {
-        OracleJDBC oracle = new OracleJDBC();
-        oracle.start();
+        /*OracleJDBC oracle = new OracleJDBC();
+        oracle.start();*/
         launch(args);
     }
 
