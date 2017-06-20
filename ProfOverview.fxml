@@ -10,11 +10,11 @@
 
 <AnchorPane prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.ProfOverviewController">
    <children>
-      <Label layoutX="63.0" layoutY="159.0" text="Professeur : " />
-      <Label layoutX="55.0" layoutY="227.0" text="Département : " />
-      <Label layoutX="53.0" layoutY="287.0" text="Fillière dirigée : " />
-      <Label layoutX="45.0" layoutY="350.0" text="Module coordiné : " />
-      <Label layoutX="65.0" layoutY="421.0" text="Spécialité : " />
+      <Label fx:id="professeur" layoutX="63.0" layoutY="159.0" text="Professeur : " />
+      <Label fx:id="departement" layoutX="55.0" layoutY="227.0" text="Département : " />
+      <Label fx:id="filliere" layoutX="53.0" layoutY="287.0" text="Fillière dirigée : " />
+      <Label fx:id="module" layoutX="45.0" layoutY="350.0" text="Module coordiné : " />
+      <Label fx:id="specialite" layoutX="65.0" layoutY="421.0" text="Spécialité : " />
       <Button layoutX="581.0" layoutY="419.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="142.0" text="Déconnexion" />
       <GridPane layoutX="280.0" layoutY="120.0" prefHeight="271.0" prefWidth="468.0">
         <columnConstraints>

@@ -27,9 +27,9 @@ public class ProfLoginController {
     // liste de professeurs en mode observable array list
     private ObservableList<Professeur> professeurData = FXCollections.observableArrayList();
 
-    Professeur exemple = new Professeur(1,"test","test","nom","prenom","specialite",null,null,null);
 
 
+    Professeur profConnecte;
 
     private Stage profLoginStage;
     private boolean okClicked = false;
@@ -94,7 +94,10 @@ public class ProfLoginController {
          //professeurData.add(new Professeur("test", "test"));
          /*
          *pour tester la fonction de test*/
-         Professeur newProf = new Professeur(1,"test","test","moi","moi","specialite",null,null,null);
+         Departement dep = new Departement("departement de test");
+         Filliere fil = new Filliere("filliere de test");
+         Module mod = new Module("module de test");
+         Professeur newProf = new Professeur(1,"test","test","moi","moi","specialite",mod,fil,dep);
          professeurData.add(newProf);
 
 
@@ -113,6 +116,9 @@ public class ProfLoginController {
     */
     public void profAffichage(Professeur prof){
         try{
+
+            setProfConnecte(prof);
+
             //Load the fxml file
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(Main.class.getResource("ProfOverview.fxml"));
@@ -127,7 +133,10 @@ public class ProfLoginController {
             dialogStage.setScene(scene);
 
             ProfOverviewController controller = loader.getController();
+            controller.setProfLoginController(this);
             controller.setProfOverviewStage(dialogStage);
+            controller.initialize();
+
 
 
             // Shows the dialog and waits until the user closes it
@@ -149,6 +158,14 @@ public class ProfLoginController {
         // serves nothing since we use this methode only if the "if statement" is true on one of the profs
         Professeur profe = new Professeur();
         return profe;
+    }
+
+    public void setProfConnecte(Professeur prof){
+        this.profConnecte = prof;
+    }
+
+    public Professeur getProfConnecte(){
+        return this.profConnecte;
     }
 
 
