@@ -34,6 +34,7 @@ public class ProfLoginController {
     private Stage profLoginStage;
     private boolean okClicked = false;
     private boolean isProfValide = false;
+    public Stage dialogStage = new Stage();
 
     public void setIsProfValide(boolean what){
         this.isProfValide = what;
@@ -104,6 +105,7 @@ public class ProfLoginController {
          professeurData.forEach(professeur -> {
              if(professeur.getEmail().equals(email) && professeur.getMotDePasse().equals(passe) ){
                  setIsProfValide(true);
+                 profLoginStage.close();
              }
              else{
                  setIsProfValide(false);
@@ -125,7 +127,7 @@ public class ProfLoginController {
             AnchorPane page = (AnchorPane) loader.load();
 
             //Create dialog stage
-            Stage dialogStage = new Stage();
+
             dialogStage.setTitle("Planing de : "+prof.getNom()+" "+prof.getPrenom());
             dialogStage.initModality(Modality.APPLICATION_MODAL);
             dialogStage.initOwner(primaryStage);
@@ -133,14 +135,18 @@ public class ProfLoginController {
             dialogStage.setScene(scene);
 
             ProfOverviewController controller = loader.getController();
-            controller.setProfLoginController(this);
             controller.setProfOverviewStage(dialogStage);
+            controller.setProfLoginController(this);
             controller.initialize();
 
 
 
             // Shows the dialog and waits until the user closes it
-            dialogStage.showAndWait();
+            dialogStage.show();
+            dialogStage.setOnCloseRequest(e -> {
+                e.consume();
+                controller.handleDisconnection();
+            });
 
 
 
