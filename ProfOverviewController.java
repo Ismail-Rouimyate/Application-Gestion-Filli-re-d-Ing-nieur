@@ -61,17 +61,13 @@ public class ProfOverviewController {
         if(prof != null){
             // fills the labels with info from professeur object
             professeur.setText(prof.getNom()+" "+prof.getPrenom());
-            departement.setText(prof.departementProperty().getValue().getNom());
-            filliere.setText(prof.filliereProperty().getValue().getNom());
-            module.setText(prof.moduleProperty().getValue().getNom());
+            departement.setText(prof.getDepratement());
             specialite.setText(prof.specialiteProperty().getValue());
         }
         else {
             // prof is null, remove all text
             professeur.setText("inexistant");
             departement.setText("inexistant");
-            filliere.setText("inexistant");
-            module.setText("inexistant");
             specialite.setText("inexistant");
         }
     }

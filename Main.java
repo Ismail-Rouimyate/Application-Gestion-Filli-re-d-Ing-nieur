@@ -112,8 +112,13 @@ public class Main extends Application {
     }
 
     public static void main(String[] args) {
-        OracleJDBC oracle = new OracleJDBC();
-        //oracle.start();
+        // connection to oracle database
+        /*OracleJDBC oracle = new OracleJDBC();
+        oracle.start();*/
+        // connection to mysql database
+        MySqlJDBC sql = new MySqlJDBC();
+        sql.connect();
+        // put the one you dont want in commentary
         launch(args);
     }
 

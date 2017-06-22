@@ -6,6 +6,8 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 import java.lang.String;
 
@@ -21,9 +23,9 @@ public class Professeur {
     private final StringProperty nom;
     private final StringProperty prenom;
     private final StringProperty specialite;
-    private final ObjectProperty<Module> module;
-    private final ObjectProperty<Filliere> filliere;
-    private final ObjectProperty<Departement> departement;
+    private final ObservableList<Module> module;
+    private final ObservableList<Filliere> filliere;
+    private final String departement;
 
 
     // construtor without parameters
@@ -52,16 +54,16 @@ public class Professeur {
         this.departement = null;
     }
 
-    public Professeur(int id, String email, String motDePasse, String nom, String prenom, String specialite,Module module, Filliere filliere, Departement departement){
+    public Professeur(int id, String email, String motDePasse, String nom, String prenom, String specialite,ObservableList<Module> module, ObservableList<Filliere> filliere, String departement){
         this.email = new SimpleStringProperty(email);
         this.motDePasse = new SimpleStringProperty(motDePasse);
         this.id = new SimpleIntegerProperty(id);
         this.nom = new SimpleStringProperty(nom);
         this.prenom = new SimpleStringProperty(prenom);
         this.specialite = new SimpleStringProperty(specialite);
-        this.module = new SimpleObjectProperty<Module>(module);
-        this.filliere = new SimpleObjectProperty<Filliere>(filliere);
-        this.departement = new SimpleObjectProperty<Departement>(departement);
+        this.module = module;
+        this.filliere = filliere;
+        this.departement = departement;
     }
     // Start getters
     public String getEmail(){
@@ -93,12 +95,12 @@ public class Professeur {
     }
 
     public String getFilliere(){
-        return filliere.get();
-    }
+        return filliere;
+    }*/
 
     public String getDepratement(){
-        return departement.get();
-    }*/
+        return departement;
+    }
     // End getters
 
     // Start setters
@@ -126,17 +128,11 @@ public class Professeur {
         this.specialite.set(specialite);
     }
 
-    public void setModule(Module module){
-        this.module.set(module);
-    }
 
-    public void setFilliere(Filliere filliere){
-        this.filliere.set(filliere);
-    }
 
-    public void setDepartement(Departement departement){
-        this.departement.set(departement);
-    }
+
+
+
     // end setters
 
     // start properities
@@ -164,17 +160,7 @@ public class Professeur {
         return specialite;
     }
 
-    public ObjectProperty<Module> moduleProperty(){
-        return module;
-    }
 
-    public ObjectProperty<Filliere> filliereProperty(){
-        return filliere;
-    }
-
-    public ObjectProperty<Departement> departementProperty(){
-        return departement;
-    }
 
     // end Properties
 }
