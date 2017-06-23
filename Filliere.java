@@ -22,4 +22,15 @@ public class Filliere {
     public String getDate(){ return this.dateaccr.getValue(); }
     public int getId_filliere(){ return this.id_filliere.getValue(); }
 
+    public StringProperty intituleProperty(){
+        return intitule;
+    }
+
+    public StringProperty dateaccrProperty(){
+        return dateaccr;
+    }
+
+    public IntegerProperty idProperty(){
+        return id_filliere;
+    }
 }

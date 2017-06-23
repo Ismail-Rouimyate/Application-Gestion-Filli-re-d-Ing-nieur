@@ -125,15 +125,15 @@ public class ProfLoginController {
          try{
              results=getInfo(email,passe);
          }catch (Exception e){
-             System.out.println(e);
+             e.printStackTrace();
          }
 
-         if (results != null){
+         try{
              String id = results.get(0);
              professeurData.add(new Professeur(Integer.parseInt(id), email, passe, getNomProf(id), getPrenomProf(id), getSpecialite(id), getModule(id), getFilliere(id), getDepartement(id)));
              setIsProfValide(true);
              profLoginStage.close();
-         }else{
+         }catch (IndexOutOfBoundsException e){
              setIsProfValide(false);
          }
 
@@ -218,9 +218,10 @@ public class ProfLoginController {
                 System.out.println(result.getString("id_prof"));
                 array.add(result.getString("id_prof"));
             }
+            result.close();
             return array;
         }catch (Exception e){
-            System.out.println(e);
+            e.printStackTrace();
         }
         System.out.println("rien");
         return null;
@@ -237,9 +238,10 @@ public class ProfLoginController {
             while (result.next()){
                 nomProf = result.getString("nom");
             }
+            result.close();
             return nomProf;
         }catch (Exception e){
-            System.out.println(e);
+            e.printStackTrace();
         }
         return null;
     }
@@ -255,9 +257,10 @@ public class ProfLoginController {
             while (result.next()){
                 prenomProf = result.getString("prenom");
             }
+            result.close();
             return prenomProf;
         }catch (Exception e){
-            System.out.println(e);
+            e.printStackTrace();
         }
         return null;
     }
@@ -273,9 +276,10 @@ public class ProfLoginController {
             while (result.next()){
                 departementProf = result.getString("departement");
             }
+            result.close();
             return departementProf;
         }catch (Exception e){
-            System.out.println(e);
+            e.printStackTrace();
         }
         return null;
     }
@@ -291,9 +295,10 @@ public class ProfLoginController {
             while (result.next()){
                 specialiteProf = result.getString("specialite");
             }
+            result.close();
             return specialiteProf;
         }catch (Exception e){
-            System.out.println(e);
+            e.printStackTrace();
         }
         return null;
     }
@@ -310,18 +315,25 @@ public class ProfLoginController {
             int id_filliere;
             String intitule;
             String date_acre;
+            int i = 0;
             while (result.next()){
+
                 id_filliere = result.getInt("id_filiere");
                 intitule = result.getString("intitule");
                 date_acre = result.getString("date_acreditation");
-                listFilliere.add(new Filliere(id_filliere, intitule, date_acre));
-
+                try{
+                    listFilliere.add(new Filliere(id_filliere, intitule, date_acre));
+                }catch (NullPointerException e){
+                    break;
+                }
             }
+            result.close();
             return listFilliere;
 
         }catch (Exception e){
-            System.out.println(e);
+            e.printStackTrace();
         }
+
         return null;
     }
 
@@ -339,7 +351,7 @@ public class ProfLoginController {
             int vhtd;
             int vhtp;
             int vhap;
-            ObservableList<ElementModule> listElem = FXCollections.observableArrayList();
+            ObservableList<String> listElem = FXCollections.observableArrayList();
             while (result.next()){
                 id_module = result.getInt("id_module");
                 intitule = result.getString("intitule");
@@ -347,13 +359,14 @@ public class ProfLoginController {
                 vhtd = result.getInt("volume_horaire_td");
                 vhtp = result.getInt("volume_horaire_tp");
                 vhap = result.getInt("volume_horaire_ap");
-                listElem = getListeElementsForModule(Integer.toString(id_module));
+                //listElem = getListeElementsForModule(Integer.toString(id_module));
                 listModule.add(new Module(id_module, intitule, vhc, vhtd, vhtp, vhap, listElem));
             }
+            result.close();
             return listModule;
 
         }catch (Exception e){
-            System.out.println(e);
+            e.printStackTrace();
         }
         return null;
     }
@@ -375,10 +388,11 @@ public class ProfLoginController {
                 id_prof = result.getInt("id_prof");
                 listElem.add(new ElementModule(id_elem, intitule, id_prof, Integer.parseInt(id)));
             }
+            result.close();
             return listElem;
 
         }catch (Exception e){
-            System.out.println(e);
+            e.printStackTrace();
         }
         return null;
     }
@@ -400,9 +414,10 @@ public class ProfLoginController {
                 id_module = result.getInt("id_prof");
                 listElem.add(new ElementModule(id_elem, intitule, Integer.parseInt(id), id_module));
             }
+            result.close();
             return listElem;
         }catch (Exception e){
-            System.out.println(e);
+            e.printStackTrace();
         }
         return null;
     }
