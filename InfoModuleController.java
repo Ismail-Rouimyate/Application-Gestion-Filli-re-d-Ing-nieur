@@ -61,7 +61,7 @@ public class InfoModuleController {
     /**
      * Called by the controller of origin
      * to give refrence back to itself
-     * @param profOverviewController
+     * @param profOverviewController .
      */
     public void setProfOverviewController(ProfOverviewController profOverviewController){
         this.profOverviewController = profOverviewController;
