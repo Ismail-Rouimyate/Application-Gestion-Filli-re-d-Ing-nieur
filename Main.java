@@ -3,6 +3,7 @@ package sample;
 import java.io.IOException;
 
 import javafx.application.Application;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
@@ -91,6 +92,38 @@ public class Main extends Application {
             //
             ProfLoginController controller = loader.getController();
             controller.setProfLoginStage(dialogStage);
+
+            // Show the dialog and waits until the user closes it
+            dialogStage.showAndWait();
+
+            return controller.isOkClicked();
+
+        }catch (IOException e){
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    @FXML
+    private boolean showAdminLoginDialog(){
+        try {
+
+            // Load the fxml file and create a new stage for the popup dialog
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(Main.class.getResource("AdminLogin.fxml"));
+            AnchorPane page = (AnchorPane) loader.load();
+
+            // Create the dialog stage
+            Stage dialogStage = new Stage();
+            dialogStage.setTitle("Login en tant qu'administrateur");
+            dialogStage.initModality(Modality.APPLICATION_MODAL);
+            dialogStage.initOwner(primaryStage);
+            Scene scene = new Scene(page);
+            dialogStage.setScene(scene);
+
+            //
+            AdminLoginController controller = loader.getController();
+            controller.setAdminLoginStage(dialogStage);
 
             // Show the dialog and waits until the user closes it
             dialogStage.showAndWait();
