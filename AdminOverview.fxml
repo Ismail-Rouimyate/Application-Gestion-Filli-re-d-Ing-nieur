@@ -11,7 +11,7 @@
          <buttons>
             <Button mnemonicParsing="false" onAction="#showGestionProf" text="Gestion des professeurs" />
             <Button mnemonicParsing="false" text="Gestion des modules " />
-            <Button mnemonicParsing="false" text="Gestion des fillières" />
+            <Button mnemonicParsing="false" onAction="#showGestionFiliere" text="Gestion des fillières" />
             <Button mnemonicParsing="false" text="Statistiques" />
             <Button mnemonicParsing="false" text="Gestion des planings" />
          </buttons>

@@ -322,7 +322,7 @@ public class ProfLoginController {
                 intitule = result.getString("intitule");
                 date_acre = result.getString("date_acreditation");
                 try{
-                    listFilliere.add(new Filliere(id_filliere, intitule, date_acre));
+                    listFilliere.add(new Filliere(id_filliere, intitule, date_acre,"",""));
                 }catch (NullPointerException e){
                     break;
                 }

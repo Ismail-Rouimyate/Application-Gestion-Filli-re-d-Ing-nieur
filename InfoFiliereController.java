@@ -69,7 +69,7 @@ public class InfoFiliereController {
                 filiereData.add(new Filliere(
                         result.getInt(1),
                         result.getString(2),
-                        result.getString(3)
+                        result.getString(3),"",""
                 ));
                 filiereTable.setItems(filiereData);
             }

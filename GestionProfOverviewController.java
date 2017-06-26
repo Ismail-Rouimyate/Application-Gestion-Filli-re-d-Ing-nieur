@@ -125,8 +125,6 @@ public class GestionProfOverviewController {
     public void setAdminOverviewController(AdminOverviewController adminOverviewController){
         this.adminOverviewController = adminOverviewController;
 
-        // TODO là ou il faut vérifier
-
         professeurTable.setItems(adminOverviewController.getProfData());
     }
 
@@ -210,7 +208,7 @@ public class GestionProfOverviewController {
         try {
             // Load the fxml file
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(GestionProfOverviewController.class.getResource("ProfEditDIalog.fxml"));
+            loader.setLocation(GestionProfOverviewController.class.getResource("ProfEditDialog.fxml"));
             AnchorPane page = (AnchorPane) loader.load();
 
             // create the dialog stage

@@ -17,10 +17,10 @@
         <items>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                <children>
-                  <TableView layoutX="-12.0" layoutY="21.0" prefHeight="298.0" prefWidth="175.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <TableView fx:id="filiereTable" layoutX="-12.0" layoutY="21.0" prefHeight="298.0" prefWidth="175.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <columns>
-                      <TableColumn prefWidth="56.0" text="Id" />
-                      <TableColumn prefWidth="118.0" text="Titre de filière" />
+                      <TableColumn fx:id="idColumn" prefWidth="56.0" text="Id" />
+                      <TableColumn fx:id="nomColumn" prefWidth="118.0" text="Titre de filière" />
                     </columns>
                      <columnResizePolicy>
                         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
@@ -31,33 +31,30 @@
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                <children>
                   <Label layoutX="14.0" layoutY="14.0" text="Détails de filière" />
-                  <GridPane layoutX="14.0" layoutY="59.0" prefHeight="178.0" prefWidth="385.0">
+                  <GridPane layoutX="16.0" layoutY="71.0" prefHeight="156.0" prefWidth="385.0">
                     <columnConstraints>
                       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                     </columnConstraints>
                     <rowConstraints>
-                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints maxHeight="55.0" minHeight="10.0" prefHeight="51.0" vgrow="SOMETIMES" />
+                      <RowConstraints maxHeight="61.0" minHeight="10.0" prefHeight="52.0" vgrow="SOMETIMES" />
+                      <RowConstraints maxHeight="69.0" minHeight="10.0" prefHeight="53.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
                         <Label text="Intitulé" />
                         <Label text="Date d'acréditaion" GridPane.rowIndex="1" />
                         <Label text="Coordiateur de module" GridPane.rowIndex="2" />
-                        <Label text="Liste de semestres" GridPane.rowIndex="3" />
-                        <Label text="Label" GridPane.columnIndex="1" />
-                        <Label text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                        <Button mnemonicParsing="false" text="Button" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                        <Button mnemonicParsing="false" text="Button" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                        <Label fx:id="intituleLabel" text="Label" GridPane.columnIndex="1" />
+                        <Label fx:id="dateLabel" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <Label fx:id="profLabel" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                      </children>
                   </GridPane>
                   <ButtonBar layoutX="138.0" layoutY="244.0" prefHeight="40.0" prefWidth="200.0">
                     <buttons>
-                      <Button mnemonicParsing="false" text="Nouveau" />
-                        <Button mnemonicParsing="false" text="Editer" />
-                        <Button mnemonicParsing="false" text="Supprimer" />
+                      <Button mnemonicParsing="false" onAction="#handleNewFiliere" text="Nouveau" />
+                        <Button mnemonicParsing="false" onAction="#handleEditFiliere" text="Editer" />
+                        <Button mnemonicParsing="false" onAction="#handleDelete" text="Supprimer" />
                     </buttons>
                   </ButtonBar>
                </children>
