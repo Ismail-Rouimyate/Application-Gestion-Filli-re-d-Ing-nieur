@@ -25,7 +25,7 @@ public class Professeur {
     private final StringProperty specialite;
     private final ObservableList<Module> module;
     private final ObservableList<Filliere> filliere;
-    private final String departement;
+    private final StringProperty departement;
 
 
     // construtor without parameters
@@ -63,7 +63,7 @@ public class Professeur {
         this.specialite = new SimpleStringProperty(specialite);
         this.module = module;
         this.filliere = filliere;
-        this.departement = departement;
+        this.departement = new SimpleStringProperty(departement);
     }
     // Start getters
     public String getEmail(){
@@ -89,17 +89,17 @@ public class Professeur {
     public int getId(){
         return id.get();
     }
-    /*
-    public String getModule(){
-        return module.getTitre();
+
+    public ObservableList<Module> getModule(){
+        return module;
     }
 
-    public String getFilliere(){
+    public ObservableList<Filliere> getFilliere(){
         return filliere;
-    }*/
+    }
 
     public String getDepratement(){
-        return departement;
+        return departement.get();
     }
     // End getters
 
@@ -127,6 +127,8 @@ public class Professeur {
     public void setSpecialite(String specialite){
         this.specialite.set(specialite);
     }
+
+    public void setDepartement(String departement) { this.departement.set(departement); }
 
 
 

@@ -5,12 +5,11 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
 <AnchorPane prefHeight="272.0" prefWidth="801.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.AdminOverviewController">
    <children>
       <ButtonBar layoutX="-2.0" layoutY="210.0" prefHeight="48.0" prefWidth="785.0">
          <buttons>
-            <Button mnemonicParsing="false" text="Gestion des professeurs" />
+            <Button mnemonicParsing="false" onAction="#showGestionProf" text="Gestion des professeurs" />
             <Button mnemonicParsing="false" text="Gestion des modules " />
             <Button mnemonicParsing="false" text="Gestion des fillières" />
             <Button mnemonicParsing="false" text="Statistiques" />
