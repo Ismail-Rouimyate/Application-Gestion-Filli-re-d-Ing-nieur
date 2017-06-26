@@ -86,6 +86,7 @@ public class AdminOverviewController {
     }
 
     public ObservableList<Professeur> getProfData(){
+        profData.clear();
         try{
             Connection con = MySqlJDBC.connection;
             PreparedStatement statement = con.prepareStatement("SELECT * FROM Professeur");
