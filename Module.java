@@ -90,8 +90,8 @@ public class Module {
 
     public void setListElem (String elem1, String elem2, String elem3) {
         this.listElem.set(0,elem1);
-        this.listElem.set(1,elem2);
-        this.listElem.set(2,elem2);
+        this.listElem.add(elem2);
+        this.listElem.add(elem3);
     }
 
     public void setNomProf (String nomProf){ this.nomProf.set(nomProf);}

@@ -13,7 +13,7 @@
             <Button mnemonicParsing="false" onAction="#showGestionModule" text="Gestion des modules " />
             <Button mnemonicParsing="false" onAction="#showGestionFiliere" text="Gestion des fillières" />
             <Button mnemonicParsing="false" text="Statistiques" />
-            <Button mnemonicParsing="false" text="Gestion des planings" />
+            <Button mnemonicParsing="false" onAction="#showGestionPlaning" text="Gestion des planings" />
          </buttons>
       </ButtonBar>
       <Label layoutX="315.0" layoutY="136.0" text="Menu de gestion Administrateur" />

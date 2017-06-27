@@ -144,6 +144,7 @@ public class ModuleEditDialogController {
                     statement.setString(6,vhapField.getText());
                     statement.setString(7,Integer.toString(getProf(nomProfField.getText(), prenomProfField.getText())));
                     statement.executeUpdate();
+                    // TODO : elements de module à mettre à jour
                 }catch (Exception e){
                     e.printStackTrace();
                 }
@@ -223,7 +224,7 @@ public class ModuleEditDialogController {
     private int getIdModule(String intitule){
         try{
             Connection con = MySqlJDBC.connection;
-            PreparedStatement statement = con.prepareStatement("SELECT * FROM module WHERE intitule");
+            PreparedStatement statement = con.prepareStatement("SELECT * FROM module WHERE intitule = ?");
             statement.setString(1,intitule);
             ResultSet result = statement.executeQuery();
             while (result.next()){

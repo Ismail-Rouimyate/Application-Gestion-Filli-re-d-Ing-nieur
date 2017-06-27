@@ -1,6 +1,7 @@
 package sample;
 
 
+import javafx.beans.property.IntegerProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -21,6 +22,7 @@ public class AdminOverviewController {
     private ObservableList<Professeur> profData = FXCollections.observableArrayList();
     private ObservableList<Filliere> filliereData = FXCollections.observableArrayList();
     private ObservableList<Module> moduleData = FXCollections.observableArrayList();
+    private ObservableList<Seance> seanceData = FXCollections.observableArrayList();
 
     private Stage adminOverviewStage = new Stage();
     private Stage gestionProfStage = new Stage();
@@ -259,5 +261,71 @@ public class AdminOverviewController {
             e.printStackTrace();
         }
         return moduleData;
+    }
+
+    public void showGestionPlaning(){
+        try{
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(AdminOverviewController.class.getResource("GestionPlaningOverview.fxml"));
+            AnchorPane gestionPlaning = (AnchorPane) loader.load();
+            try{
+                gestionPlaningStage.setTitle("Gestion des séances");
+                gestionPlaningStage.initOwner(adminOverviewStage);
+                Scene scene = new Scene(gestionPlaning);
+                gestionPlaningStage.setScene(scene);
+            }catch (IllegalStateException e){
+                Scene scene = new Scene(gestionPlaning);
+                gestionPlaningStage.setScene(scene);
+            }
+
+            // Give the controller access to the AdminOverviewController
+            GestionPlaningOverviewController controller = loader.getController();
+            controller.setGestionPlaningStage(gestionPlaningStage);
+            controller.setAdminOverviewController(this);
+            controller.initialize();
+            gestionPlaningStage.showAndWait();
+        }catch (IOException e){
+            e.printStackTrace();
+        }
+    }
+
+    public ObservableList<Seance> getSeanceData(){
+        seanceData.clear();
+        String nomProf = "";
+        String prenomProf ="";
+        String elem="";
+        try{
+            Connection con = MySqlJDBC.connection;
+            PreparedStatement statement = con.prepareStatement("SELECT * FROM seance");
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()){
+                PreparedStatement statement1 = con.prepareStatement("SELECT nom, prenom FROM professeur WHERE id_prof = ?");
+                statement1.setString(1, Integer.toString(resultSet.getInt("id_prof")));
+                ResultSet resultSet1 = statement1.executeQuery();
+                while (resultSet1.next()){
+                    nomProf = resultSet1.getString(1);
+                    prenomProf = resultSet1.getString(2);
+                }
+                PreparedStatement statement2 = con.prepareStatement("SELECT intitule FROM element_module WHERE id_elem = ?");
+                statement2.setString(1,Integer.toString(resultSet.getInt("id_elem")));
+                ResultSet resultSet2 = statement2.executeQuery();
+                while (resultSet2.next()){
+                    elem = resultSet2.getString(1);
+                }
+                Seance seance = new Seance(resultSet.getInt("id_seance"),
+                        resultSet.getInt("id_planing"),
+                        resultSet.getString("date"),
+                        resultSet.getString("heure_debut"),
+                        resultSet.getString("groupe"),
+                        nomProf,prenomProf,elem,
+                        resultSet.getString("type"),
+                        resultSet.getString("salle"));
+                seanceData.add(seance);
+            }
+            return seanceData;
+        }catch (Exception e){
+            e.printStackTrace();
+            return seanceData;
+        }
     }
 }
