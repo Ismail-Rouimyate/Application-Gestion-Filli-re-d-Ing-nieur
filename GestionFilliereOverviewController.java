@@ -157,7 +157,7 @@ public class GestionFilliereOverviewController {
         try {
             // Load the fxml file
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(GestionProfOverviewController.class.getResource("FilliereEditDialog.fxml"));
+            loader.setLocation(GestionFilliereOverviewController.class.getResource("FilliereEditDialog.fxml"));
             AnchorPane page = (AnchorPane) loader.load();
 
             // create the dialog stage
@@ -168,7 +168,7 @@ public class GestionFilliereOverviewController {
             Scene scene = new Scene(page);
             dialogStage.setScene(scene);
 
-            // set the prof into the controller
+            // set the filiere into the controller
             FilliereEditDialogController controller = loader.getController();
             controller.setDialogStage(dialogStage);
             controller.setFilliere(filliere);

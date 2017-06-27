@@ -11,16 +11,16 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<AnchorPane prefHeight="300.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.GestionModuleOverviewController">
+<AnchorPane prefHeight="350.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.GestionModuleOverviewController">
    <children>
       <SplitPane dividerPositions="0.29797979797979796" layoutX="66.0" layoutY="94.0" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <items>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                <children>
-                  <TableView layoutX="50.0" layoutY="42.0" prefHeight="398.0" prefWidth="175.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <TableView fx:id="moduleTable" layoutX="50.0" layoutY="42.0" prefHeight="398.0" prefWidth="175.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <columns>
-                      <TableColumn prefWidth="75.0" text="ID" />
-                      <TableColumn prefWidth="99.0" text="Titre de module" />
+                      <TableColumn fx:id="idColumn" prefWidth="75.0" text="ID" />
+                      <TableColumn fx:id="intituleColumn" prefWidth="99.0" text="Titre de module" />
                     </columns>
                      <columnResizePolicy>
                         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
@@ -55,24 +55,25 @@
                         <Label text="Element 1" GridPane.rowIndex="5" />
                         <Label text="Element 2" GridPane.rowIndex="6" />
                         <Label text="Element 3" GridPane.rowIndex="7" />
-                        <Label text="Label" GridPane.columnIndex="1" />
-                        <Label text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                        <Label text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                        <Label text="Label" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                        <Label text="Label" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                        <Label text="Label" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                        <Label text="Label" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-                        <Label text="Label" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+                        <Label fx:id="intituleLabel" text="Label" GridPane.columnIndex="1" />
+                        <Label fx:id="vhcLabel" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <Label fx:id="vhtdLabel" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                        <Label fx:id="vhtpLabel" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                        <Label fx:id="vhapLabel" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                        <Label fx:id="element1Label" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                        <Label fx:id="element2Label" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                        <Label fx:id="element3Label" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="7" />
                      </children>
                   </GridPane>
-                  <ButtonBar layoutX="138.0" layoutY="261.0" prefHeight="34.0" prefWidth="200.0">
+                  <ButtonBar layoutX="138.0" layoutY="300.0" prefHeight="34.0" prefWidth="200.0">
                     <buttons>
-                      <Button mnemonicParsing="false" text="Nouveau" />
-                        <Button mnemonicParsing="false" text="Editer" />
-                        <Button mnemonicParsing="false" text="Supprimer" />
+                      <Button mnemonicParsing="false" onAction="#handleNew" text="Nouveau" />
+                        <Button mnemonicParsing="false" onAction="#handleEdit" text="Editer" />
+                        <Button mnemonicParsing="false" onAction="#handleDelete" text="Supprimer" />
                     </buttons>
                   </ButtonBar>
-                  <Button layoutX="18.0" layoutY="266.0" mnemonicParsing="false" text="Coordinateur" />
+                  <Label layoutX="14.0" layoutY="270.0" text="Coordinateur de module" />
+                  <Label fx:id="profLabel" layoutX="209.0" layoutY="270.0" text="Label" />
                </children>
             </AnchorPane>
         </items>

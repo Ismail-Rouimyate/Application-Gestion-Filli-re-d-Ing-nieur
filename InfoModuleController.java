@@ -81,7 +81,7 @@ public class InfoModuleController {
                         result.getInt(4),
                         result.getInt(5),
                         result.getInt(6),
-                        listElem
+                        listElem, "", ""
                 ));
                 moduleTable.setItems(moduleData);
             }

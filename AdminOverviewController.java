@@ -20,6 +20,7 @@ public class AdminOverviewController {
 
     private ObservableList<Professeur> profData = FXCollections.observableArrayList();
     private ObservableList<Filliere> filliereData = FXCollections.observableArrayList();
+    private ObservableList<Module> moduleData = FXCollections.observableArrayList();
 
     private Stage adminOverviewStage = new Stage();
     private Stage gestionProfStage = new Stage();
@@ -95,6 +96,9 @@ public class AdminOverviewController {
             ObservableList<Module> moduleData = FXCollections.observableArrayList();
             ObservableList<Filliere> filiereData = FXCollections.observableArrayList();
             while (result.next()){
+                // TODO : vérifier si les clear() marchent
+                moduleData.clear();
+                filiereData.clear();
                 PreparedStatement statement1 = con.prepareStatement("SELECT * FROM filiere WHERE id_prof = ?");
                 statement1.setString(1,Integer.toString(result.getInt(1)));
                 ResultSet result1 = statement1.executeQuery();
@@ -107,7 +111,7 @@ public class AdminOverviewController {
                 ResultSet result2 = statement2.executeQuery();
                 while (result2.next()){
                     Module module = new Module(result2.getInt(1),result2.getString(2),result2.getInt(3),result2.getInt(4),
-                                                result2.getInt(5),result2.getInt(6),null);
+                                                result2.getInt(5),result2.getInt(6),null, null, null);
                     moduleData.add(module);
                 }
 
@@ -189,5 +193,71 @@ public class AdminOverviewController {
         return filliereData;
     }
 
-    //TODO : résoudre les erreurs dans le proffestion pour les modules et filières
+    //TODO : résoudre les erreurs dans le profestion pour les modules et filières
+
+    public void showGestionModule(){
+        try{
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(AdminOverviewController.class.getResource("GestionModuleOverview.fxml"));
+            AnchorPane gestionModule = (AnchorPane) loader.load();
+            try{
+                gestionModuleStage.setTitle("Gestion des modules");
+                gestionModuleStage.initOwner(adminOverviewStage);
+                Scene scene = new Scene(gestionModule);
+                gestionModuleStage.setScene(scene);
+            }catch (IllegalStateException e){
+                Scene scene = new Scene(gestionModule);
+                gestionModuleStage.setScene(scene);
+            }
+
+            // Give the controller access to the AdminOverviewController
+            GestionModuleOverviewController controller = loader.getController();
+            controller.setGestionModuleStage(gestionModuleStage);
+            controller.setAdminOverviewController(this);
+            controller.initialize();
+            gestionModuleStage.showAndWait();
+        }catch (IOException e){
+            e.printStackTrace();
+        }
+    }
+
+    public ObservableList<Module> getModuleData(){
+        moduleData.clear();
+        ObservableList<String> listElem = FXCollections.observableArrayList();
+        String nomProf = "";
+        String prenomProf = "";
+        try{
+            Connection con = MySqlJDBC.connection;
+            PreparedStatement statement = con.prepareStatement("SELECT * FROM module");
+            ResultSet result = statement.executeQuery();
+            while (result.next()){
+                listElem.clear();
+                PreparedStatement statement1 = con.prepareStatement("SELECT intitule FROM element_module WHERE id_module = ?");
+                statement1.setString(1,Integer.toString(result.getInt(1)));
+                ResultSet result1 = statement1.executeQuery();
+                while (result1.next()){
+                    listElem.add(result1.getString(1));
+                }
+                PreparedStatement statement2 = con.prepareStatement("SELECT nom, prenom FROM professeur WHERE id_prof = ?");
+                statement2.setString(1,Integer.toString(result.getInt(9)));
+                ResultSet result2 = statement2.executeQuery();
+                while (result2.next()){
+                    nomProf = result2.getString(1);
+                    prenomProf = result2.getString(2);
+                }
+                Module module = new Module(result.getInt(1),
+                        result.getString(2),
+                        result.getInt(3),
+                        result.getInt(4),
+                        result.getInt(5),
+                        result.getInt(6),
+                        listElem, nomProf, prenomProf);
+                moduleData.add(module);
+            }
+            return moduleData;
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return moduleData;
+    }
 }

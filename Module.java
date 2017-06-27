@@ -15,8 +15,13 @@ public class Module {
     private final IntegerProperty vhtp;
     private final IntegerProperty vhap;
     private final ObservableList<String> listElem;
+    private final StringProperty nomProf;
+    private final StringProperty prenomProf;
 
-    public Module(int id, String nom, int vhc, int vhtd, int vhtp, int vhap, ObservableList<String> listElem){
+
+    public Module(){ this(0,null,0,0,0,0,null,null,null); }
+
+    public Module(int id, String nom, int vhc, int vhtd, int vhtp, int vhap, ObservableList<String> listElem, String nomProf, String prenomProf){
         this.id = new SimpleIntegerProperty(id);
         this.intitule = new SimpleStringProperty(nom);
         this.vhc = new SimpleIntegerProperty(vhc);
@@ -24,8 +29,12 @@ public class Module {
         this.vhtp = new SimpleIntegerProperty(vhtp);
         this.vhap = new SimpleIntegerProperty(vhap);
         this.listElem = listElem;
+        this.nomProf = new SimpleStringProperty(nomProf);
+        this.prenomProf = new SimpleStringProperty(prenomProf);
 
     }
+
+    public IntegerProperty idProperty(){ return id; }
 
     public StringProperty intituleProperty(){
         return intitule;
@@ -35,9 +44,7 @@ public class Module {
         return vhc;
     }
 
-    public IntegerProperty vhtdProperty(){
-        return vhtd;
-    }
+    public IntegerProperty vhtdProperty(){ return vhtd; }
 
     public IntegerProperty vhtpProperty(){
         return vhtp;
@@ -51,7 +58,44 @@ public class Module {
         return listElem;
     }
 
-    public String getNom(){ return this.intitule.getValue(); }
+    public StringProperty nomProfProperty() { return nomProf; }
 
+    public StringProperty prenomProfProperty() { return prenomProf; }
+
+    public String getNom(){ return this.intitule.get(); }
+
+    public int getId(){ return this.id.get(); }
+
+    public int getvhc(){ return this.vhc.get(); }
+
+    public int getvhtd(){ return this.vhtd.get(); }
+
+    public int getvhtp(){ return this.vhtp.get(); }
+
+    public int getvhap(){ return this.vhap.get(); }
+
+    public String getNomProf(){ return this.nomProf.get(); }
+
+    public String getPrenomProf(){ return this.prenomProf.get(); }
+
+    public void setIntitule(String intitule) { this.intitule.set(intitule);}
+
+    public void setVhc (int vhc) { this.vhc.set(vhc); }
+
+    public void setVhtd (int vhtd) { this.vhtd.set(vhtd); }
+
+    public void setVhtp (int vhtp) { this.vhtp.set(vhtp); }
+
+    public void setVhap (int vhap) { this.vhap.set(vhap); }
+
+    public void setListElem (String elem1, String elem2, String elem3) {
+        this.listElem.set(0,elem1);
+        this.listElem.set(1,elem2);
+        this.listElem.set(2,elem2);
+    }
+
+    public void setNomProf (String nomProf){ this.nomProf.set(nomProf);}
+
+    public void setPrenomProf (String prenomProf) { this.prenomProf.set(prenomProf);}
 
 }

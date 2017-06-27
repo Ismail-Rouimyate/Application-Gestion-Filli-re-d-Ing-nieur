@@ -44,7 +44,7 @@
                      <children>
                         <Label text="Intitulé" />
                         <Label text="Date d'acréditaion" GridPane.rowIndex="1" />
-                        <Label text="Coordiateur de module" GridPane.rowIndex="2" />
+                        <Label text="Coordiateur de Filière" GridPane.rowIndex="2" />
                         <Label fx:id="intituleLabel" text="Label" GridPane.columnIndex="1" />
                         <Label fx:id="dateLabel" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                         <Label fx:id="profLabel" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2" />
