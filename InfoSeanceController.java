@@ -7,9 +7,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
-/**
- * Created by ismail1 on 22/06/2017.
- */
+
 public class InfoSeanceController {
     @FXML
     private Label dateLabel;
@@ -74,19 +72,17 @@ public class InfoSeanceController {
             statement.setString(2,profId);
             statement.setString(3,Integer.toString(numSeance));
             ResultSet result = statement.executeQuery();
-
-            dateLabel.setText(result.getString("date"));
-            heureLabel.setText(result.getString("heure_debut"));
-            typeLabel.setText(result.getString("type"));
-            salleLabel.setText(result.getString("salle"));
-            groupeLabel.setText(result.getString("groupe"));
+            while (result.next()) {
+                System.out.println(result.getString("date"));
+                dateLabel.setText(result.getString("date"));
+                heureLabel.setText(result.getString("heure_debut"));
+                typeLabel.setText(result.getString("type"));
+                salleLabel.setText(result.getString("salle"));
+                groupeLabel.setText(result.getString("groupe"));
+            }
             result.close();
         }catch (Exception e){
-            dateLabel.setText("");
-            heureLabel.setText("");
-            typeLabel.setText("");
-            salleLabel.setText("");
-            groupeLabel.setText("");
+            e.printStackTrace();
         }
         try{
             Connection con = MySqlJDBC.connection;
@@ -97,7 +93,7 @@ public class InfoSeanceController {
             ResultSet result = statement.executeQuery();
             elementLabel.setText(result.getString("intitule"));
         }catch (Exception e){
-            elementLabel.setText("");
+            e.printStackTrace();
         }
 
     }

@@ -94,17 +94,17 @@ public class GestionModuleOverviewController {
             vhtpLabel.setText(Integer.toString(module.getvhtp()));
             vhapLabel.setText(Integer.toString(module.getvhap()));
             try {
-                element1Label.setText(module.listElemProperty().get(0));
+                element1Label.setText(module.getElem1());
             }catch (IndexOutOfBoundsException e){
 
             }
             try {
-                element2Label.setText(module.listElemProperty().get(1));
+                element2Label.setText(module.getElem2());
             }catch (IndexOutOfBoundsException e){
 
             }
             try {
-                element3Label.setText(module.listElemProperty().get(2));
+                element3Label.setText(module.getElem3());
             }catch (IndexOutOfBoundsException e){
 
             }
@@ -160,6 +160,7 @@ public class GestionModuleOverviewController {
     private void handleNew(){
         Module tempModule = new Module();
         boolean okClicked = showEditModule(tempModule);
+        moduleTable.refresh();
         if(okClicked){
             moduleTable.refresh();
         }
@@ -172,8 +173,17 @@ public class GestionModuleOverviewController {
             boolean okClicked = showEditModule(selectedModule);
             if (okClicked){
                 moduleTable.refresh();
+                // TODO : vérifier ici
+                gestionModuleStage.close();
+                AdminOverviewController adminOverviewController = new AdminOverviewController();
+                adminOverviewController.showGestionModule();
                 showModuleDetails(selectedModule);
             }
+            moduleTable.refresh();
+            // TODO : vérifier ici
+            gestionModuleStage.close();
+            AdminOverviewController adminOverviewController = new AdminOverviewController();
+            adminOverviewController.showGestionModule();
         }
         else {
             // Nothing selected
@@ -208,6 +218,7 @@ public class GestionModuleOverviewController {
             controller.setModule(module);
 
             dialogStage.showAndWait();
+            moduleTable.refresh();
             return controller.IsOkClicked();
 
         }catch (Exception e){

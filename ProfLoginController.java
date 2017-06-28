@@ -1,6 +1,5 @@
 package sample;
 
-import javafx.beans.property.ObjectProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -360,7 +359,7 @@ public class ProfLoginController {
                 vhtp = result.getInt("volume_horaire_tp");
                 vhap = result.getInt("volume_horaire_ap");
                 //listElem = getListeElementsForModule(Integer.toString(id_module));
-                listModule.add(new Module(id_module, intitule, vhc, vhtd, vhtp, vhap, listElem,null,null));
+                listModule.add(new Module(id_module, intitule, vhc, vhtd, vhtp, vhap, null, null, null,null,null));
             }
             result.close();
             return listModule;

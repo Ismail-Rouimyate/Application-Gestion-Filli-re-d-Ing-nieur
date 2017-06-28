@@ -1,5 +1,7 @@
 package sample;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
@@ -51,19 +53,19 @@ public class ModuleEditDialogController {
         vhtpField.setText(Integer.toString(module.getvhtp()));
         vhapField.setText(Integer.toString(module.getvhap()));
         try {
-            element1Field.setText(module.listElemProperty().get(0));
+            element1Field.setText(module.getElem1());
         }catch (Exception e){
-
+            element1Field.setText("aucun");
         }
         try {
-            element2Field.setText(module.listElemProperty().get(1));
+            element2Field.setText(module.getElem2());
         }catch (Exception e){
-
+            element2Field.setText("aucun");
         }
         try {
-            element3Field.setText(module.listElemProperty().get(2));
+            element3Field.setText(module.getElem3());
         }catch (Exception e){
-
+            element3Field.setText("aucun");
         }
         nomProfField.setText(module.getNomProf());
         prenomProfField.setText(module.getPrenomProf());
@@ -92,25 +94,46 @@ public class ModuleEditDialogController {
             module.setVhtd(Integer.parseInt(vhtdField.getText()));
             module.setVhtp(Integer.parseInt(vhtpField.getText()));
             module.setVhap(Integer.parseInt(vhapField.getText()));
-            module.setListElem(element1Field.getText(),element2Field.getText(),element3Field.getText());
+            module.setElem1(element1Field.getText());
+            module.setElem2(element2Field.getText());
+            module.setElem3(element3Field.getText());
             module.setNomProf(nomProfField.getText());
             module.setPrenomProf(prenomProfField.getText());
             if (verifIntitule(intituleField.getText())) {
                 try {
                     Connection con = MySqlJDBC.connection;
-                    PreparedStatement statement = con.prepareStatement("UPDATE module SET volume_horaire_cours = ?, volume_horaire_td = ?, volume_horaire_tp = ?, volume_horaire_ap = ?, id_prof = ? WHERE intitule = ?");
+                    PreparedStatement statement = con.prepareStatement("UPDATE module SET volume_horaire_cours = ?, volume_horaire_td = ?, volume_horaire_tp = ?, volume_horaire_ap = ?, id_prof = ?, elem1 = ?, elem2 = ?, elem3 = ? WHERE intitule = ?");
                     statement.setString(1,vhcField.getText());
                     statement.setString(2,vhtdField.getText());
                     statement.setString(3,vhtpField.getText());
                     statement.setString(4,vhapField.getText());
                     statement.setString(5,Integer.toString(getProf(nomProfField.getText(), prenomProfField.getText())));
-                    statement.setString(6,intituleField.getText());
+                    statement.setString(6,element1Field.getText());
+                    statement.setString(7,element2Field.getText());
+                    statement.setString(8,element3Field.getText());
+                    statement.setString(9,intituleField.getText());
                     statement.executeUpdate();
-                    module.listElemProperty().forEach(string -> {
+                    ObservableList<String> listElem = FXCollections.observableArrayList();
+                    listElem.add(module.getElem1());
+                    listElem.add(module.getElem2());
+                    listElem.add(module.getElem3());
+                    listElem.forEach(string -> {
+                        int maxId = 0;
                         try {
-                            PreparedStatement statement1 = con.prepareStatement("UPDATE element_module SET id_module = ? WHERE intitule = ?");
-                            statement1.setString(1,Integer.toString(getIdModule(intituleField.getText())));
+                            PreparedStatement statement2 = con.prepareStatement("SELECT max(id_elem) FROM element_module");
+                            ResultSet resultSet = statement2.executeQuery();
+                            while (resultSet.next()) {
+                                maxId = resultSet.getInt(1);
+                            }
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                        maxId++;
+                        try {
+                            PreparedStatement statement1 = con.prepareStatement("INSERT into element_module VALUES (?,?,0,?,0,0,0,0,0)");
+                            statement1.setString(1,Integer.toString(maxId));
                             statement1.setString(2,string);
+                            statement1.setString(3,Integer.toString(getIdModule(intituleField.getText())));
                             statement1.executeUpdate();
                         }catch (Exception e){
                             e.printStackTrace();
@@ -135,7 +158,7 @@ public class ModuleEditDialogController {
                 maxId++;
                 try{
                     Connection con = MySqlJDBC.connection;
-                    PreparedStatement statement = con.prepareStatement("INSERT INTO module VALUES(?,?,?,?,?,?,0,0,?)");
+                    PreparedStatement statement = con.prepareStatement("INSERT INTO module VALUES(?,?,?,?,?,?,0,0,?,?,?,?)");
                     statement.setString(1,Integer.toString(maxId));
                     statement.setString(2,intituleField.getText());
                     statement.setString(3,vhcField.getText());
@@ -143,14 +166,43 @@ public class ModuleEditDialogController {
                     statement.setString(5,vhtpField.getText());
                     statement.setString(6,vhapField.getText());
                     statement.setString(7,Integer.toString(getProf(nomProfField.getText(), prenomProfField.getText())));
+                    statement.setString(8,element1Field.getText());
+                    statement.setString(9,element2Field.getText());
+                    statement.setString(10,element3Field.getText());
                     statement.executeUpdate();
-                    // TODO : elements de module à mettre à jour
+                    updateElem(element1Field.getText(),maxId);
+                    updateElem(element2Field.getText(),maxId);
+                    updateElem(element3Field.getText(),maxId);
                 }catch (Exception e){
                     e.printStackTrace();
                 }
             }
-            okClicked = true;
-            dialogStage.close();
+        }
+        okClicked = true;
+        dialogStage.close();
+    }
+
+    private void updateElem(String intitule, int idModule){
+        Connection con = MySqlJDBC.connection;
+        int maxId = 0;
+        try {
+            PreparedStatement statement2 = con.prepareStatement("SELECT max(id_elem) FROM element_module");
+            ResultSet resultSet = statement2.executeQuery();
+            while (resultSet.next()) {
+                maxId = resultSet.getInt(1);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        maxId++;
+        try {
+            PreparedStatement statement1 = con.prepareStatement("INSERT into element_module VALUES (?,?,0,?,0,0,0,0,0)");
+            statement1.setString(1,Integer.toString(maxId));
+            statement1.setString(2,intitule);
+            statement1.setString(3,Integer.toString(idModule));
+            statement1.executeUpdate();
+        }catch (Exception e){
+            e.printStackTrace();
         }
     }
 

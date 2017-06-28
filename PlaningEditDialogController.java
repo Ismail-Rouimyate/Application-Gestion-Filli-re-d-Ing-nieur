@@ -53,6 +53,7 @@ public class PlaningEditDialogController {
         elementField.setText(seance.getElement());
         salleField.setText(seance.getSalle());
         typeField.setText(seance.getType());
+        jourField.setText(seance.getJour());
     }
 
     public void setDialogStage(Stage dialogStage){
@@ -82,6 +83,7 @@ public class PlaningEditDialogController {
             seance.setElement(elementField.getText());
             seance.setSalle(salleField.getText());
             seance.setType(typeField.getText());
+            // TODO : problème avec le edit de seance
             if (verifSeance(seance.getIdSeance())){
                 try {
                     Connection con = MySqlJDBC.connection;

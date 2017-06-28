@@ -15,8 +15,9 @@ public class Seance {
     private final StringProperty element;
     private final StringProperty type;
     private final StringProperty salle;
+    private final StringProperty jour;
 
-    public Seance(int id, int num_planing, String date, String heure, String groupe, String nomProf, String prenomProf, String element, String type, String salle){
+    public Seance(int id, int num_planing, String date, String heure, String groupe, String nomProf, String prenomProf, String element, String type, String salle, String jour){
         this.id_seance = new SimpleIntegerProperty(id);
         this.num_planing = new SimpleIntegerProperty(num_planing);
         this.date = new SimpleStringProperty(date);
@@ -27,10 +28,11 @@ public class Seance {
         this.element = new SimpleStringProperty(element);
         this.type = new SimpleStringProperty(type);
         this.salle = new SimpleStringProperty(salle);
+        this.jour = new SimpleStringProperty(jour);
 
     }
 
-    public  Seance() { this(0,0,null,null,null,null,null,null,null,null); }
+    public  Seance() { this(0,0,null,null,null,null,null,null,null,null, null); }
 
     // Getters
     public int getIdSeance(){ return this.id_seance.get(); }
@@ -43,6 +45,7 @@ public class Seance {
     public String getElement(){ return this.element.get(); }
     public String getType(){ return this.type.get(); }
     public String getSalle(){ return this.salle.get(); }
+    public String getJour(){ return this.jour.get(); }
 
     // Properties
     public IntegerProperty idSeanceProperty(){ return id_seance; }
@@ -55,6 +58,7 @@ public class Seance {
     public StringProperty elementProperty(){ return element; }
     public StringProperty typeProperty(){ return type; }
     public StringProperty salleProperty(){ return salle; }
+    public StringProperty jourProperty(){ return jour; }
 
     // Setters
     public void setId_seance(int id_seance) { this.id_seance.set(id_seance);}
@@ -67,5 +71,5 @@ public class Seance {
     public void setElement(String element){this.element.set(element);}
     public void setType(String type){this.type.set(type);}
     public void setSalle(String salle){ this.salle.set(salle);}
-
+    public void setJour(String jour){ this.jour.set(jour);}
 }

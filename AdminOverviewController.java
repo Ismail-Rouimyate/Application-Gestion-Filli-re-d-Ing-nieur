@@ -113,7 +113,7 @@ public class AdminOverviewController {
                 ResultSet result2 = statement2.executeQuery();
                 while (result2.next()){
                     Module module = new Module(result2.getInt(1),result2.getString(2),result2.getInt(3),result2.getInt(4),
-                                                result2.getInt(5),result2.getInt(6),null, null, null);
+                                                result2.getInt(5),result2.getInt(6),null, null, null, null, null);
                     moduleData.add(module);
                 }
 
@@ -195,7 +195,6 @@ public class AdminOverviewController {
         return filliereData;
     }
 
-    //TODO : résoudre les erreurs dans le profestion pour les modules et filières
 
     public void showGestionModule(){
         try{
@@ -233,13 +232,13 @@ public class AdminOverviewController {
             PreparedStatement statement = con.prepareStatement("SELECT * FROM module");
             ResultSet result = statement.executeQuery();
             while (result.next()){
-                listElem.clear();
+                /*listElem.clear();
                 PreparedStatement statement1 = con.prepareStatement("SELECT intitule FROM element_module WHERE id_module = ?");
                 statement1.setString(1,Integer.toString(result.getInt(1)));
                 ResultSet result1 = statement1.executeQuery();
                 while (result1.next()){
                     listElem.add(result1.getString(1));
-                }
+                }*/
                 PreparedStatement statement2 = con.prepareStatement("SELECT nom, prenom FROM professeur WHERE id_prof = ?");
                 statement2.setString(1,Integer.toString(result.getInt(9)));
                 ResultSet result2 = statement2.executeQuery();
@@ -253,7 +252,7 @@ public class AdminOverviewController {
                         result.getInt(4),
                         result.getInt(5),
                         result.getInt(6),
-                        listElem, nomProf, prenomProf);
+                        result.getString(10), result.getString(11), result.getString(12), nomProf, prenomProf);
                 moduleData.add(module);
             }
             return moduleData;
@@ -319,7 +318,8 @@ public class AdminOverviewController {
                         resultSet.getString("groupe"),
                         nomProf,prenomProf,elem,
                         resultSet.getString("type"),
-                        resultSet.getString("salle"));
+                        resultSet.getString("salle"),
+                        resultSet.getString("jour"));
                 seanceData.add(seance);
             }
             return seanceData;

@@ -14,21 +14,25 @@ public class Module {
     private final IntegerProperty vhtd;
     private final IntegerProperty vhtp;
     private final IntegerProperty vhap;
-    private final ObservableList<String> listElem;
+    private final StringProperty elem1;
+    private final StringProperty elem2;
+    private final StringProperty elem3;
     private final StringProperty nomProf;
     private final StringProperty prenomProf;
 
 
-    public Module(){ this(0,null,0,0,0,0,null,null,null); }
+    public Module(){ this(0,null,0,0,0,0,null,null,null,null,null); }
 
-    public Module(int id, String nom, int vhc, int vhtd, int vhtp, int vhap, ObservableList<String> listElem, String nomProf, String prenomProf){
+    public Module(int id, String nom, int vhc, int vhtd, int vhtp, int vhap, String elem1, String elem2, String elem3, String nomProf, String prenomProf){
         this.id = new SimpleIntegerProperty(id);
         this.intitule = new SimpleStringProperty(nom);
         this.vhc = new SimpleIntegerProperty(vhc);
         this.vhtd = new SimpleIntegerProperty(vhtd);
         this.vhtp = new SimpleIntegerProperty(vhtp);
         this.vhap = new SimpleIntegerProperty(vhap);
-        this.listElem = listElem;
+        this.elem1 = new SimpleStringProperty(elem1);
+        this.elem2 = new SimpleStringProperty(elem2);
+        this.elem3 = new SimpleStringProperty(elem3);
         this.nomProf = new SimpleStringProperty(nomProf);
         this.prenomProf = new SimpleStringProperty(prenomProf);
 
@@ -54,9 +58,13 @@ public class Module {
         return vhap;
     }
 
-    public ObservableList<String> listElemProperty(){
-        return listElem;
+    public StringProperty elem1Property(){
+        return elem1;
     }
+
+    public StringProperty elem2Property() { return elem2; }
+
+    public StringProperty elem3Property() { return elem3; }
 
     public StringProperty nomProfProperty() { return nomProf; }
 
@@ -78,6 +86,12 @@ public class Module {
 
     public String getPrenomProf(){ return this.prenomProf.get(); }
 
+    public String getElem1() { return this.elem1.get(); }
+
+    public String getElem2() { return this.elem2.get(); }
+
+    public String getElem3() { return this.elem3.get(); }
+
     public void setIntitule(String intitule) { this.intitule.set(intitule);}
 
     public void setVhc (int vhc) { this.vhc.set(vhc); }
@@ -88,11 +102,11 @@ public class Module {
 
     public void setVhap (int vhap) { this.vhap.set(vhap); }
 
-    public void setListElem (String elem1, String elem2, String elem3) {
-        this.listElem.set(0,elem1);
-        this.listElem.add(elem2);
-        this.listElem.add(elem3);
-    }
+    public void setElem1 (String elem1) { this.elem1.set(elem1); }
+
+    public void setElem2 (String elem2) { this.elem2.set(elem2); }
+
+    public void setElem3 (String elem3) { this.elem3.set(elem3); }
 
     public void setNomProf (String nomProf){ this.nomProf.set(nomProf);}
 

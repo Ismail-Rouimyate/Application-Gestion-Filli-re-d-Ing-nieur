@@ -365,11 +365,14 @@ public class ProfOverviewController {
             statement.setString(2,Integer.toString(prof.getId()));
             statement.setString(3,Integer.toString(numSeance));
             ResultSet result = statement.executeQuery();
-            return result.getString("intitule");
+            while (result.next()) {
+                return result.getString("intitule");
+            }
         }catch (Exception e){
             e.printStackTrace();
             return "vide";
         }
+        return "vide";
     }
 
     public void setElements(){
@@ -407,11 +410,14 @@ public class ProfOverviewController {
             statement.setString(2,Integer.toString(prof.getId()));
             statement.setString(3,Integer.toString(numSeance));
             ResultSet result = statement.executeQuery();
-            return result.getString("groupe");
+            while (result.next()) {
+                return result.getString("groupe");
+            }
         }catch (Exception e){
             e.printStackTrace();
             return "vide";
         }
+        return "vide";
     }
 
     public void setGroupes(){
@@ -449,11 +455,14 @@ public class ProfOverviewController {
             statement.setString(2,Integer.toString(prof.getId()));
             statement.setString(3,Integer.toString(numSeance));
             ResultSet result = statement.executeQuery();
-            return result.getString("salle");
+            while (result.next()) {
+                return result.getString("salle");
+            }
         }catch (Exception e){
             e.printStackTrace();
             return "vide";
         }
+        return "vide";
     }
 
     public void setSalles(){
