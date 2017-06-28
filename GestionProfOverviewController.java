@@ -176,6 +176,7 @@ public class GestionProfOverviewController {
         Professeur tempProf = new Professeur();
         boolean okClicked = showProfEditDialog(tempProf);
         if (okClicked){
+            professeurTable.setItems(adminOverviewController.getProfData());
             professeurTable.refresh();
         }
     }

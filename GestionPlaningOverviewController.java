@@ -116,6 +116,7 @@ public class GestionPlaningOverviewController {
         Seance tempSeance = new Seance();
         boolean okClicked = showEditSeance(tempSeance);
         if (okClicked){
+            seanceTable.setItems(adminOverviewController.getSeanceData());
             seanceTable.refresh();
         }
         seanceTable.refresh();

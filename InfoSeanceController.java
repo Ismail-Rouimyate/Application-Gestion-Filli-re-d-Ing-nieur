@@ -91,7 +91,9 @@ public class InfoSeanceController {
             statement.setString(2,profId);
             statement.setString(3,Integer.toString(numSeance));
             ResultSet result = statement.executeQuery();
-            elementLabel.setText(result.getString("intitule"));
+            while (result.next()) {
+                elementLabel.setText(result.getString("intitule"));
+            }
         }catch (Exception e){
             e.printStackTrace();
         }

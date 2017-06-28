@@ -126,6 +126,18 @@
             <Label fx:id="salle20" text="Vide" GridPane.columnIndex="4" GridPane.rowIndex="15" />
             <Label fx:id="groupe24" text="Vide" GridPane.columnIndex="4" GridPane.rowIndex="17" />
             <Label fx:id="salle24" text="Vide" GridPane.columnIndex="4" GridPane.rowIndex="18" />
+            <Label text="Groupe" GridPane.rowIndex="2" />
+            <Label text="Groupe" GridPane.rowIndex="5" />
+            <Label text="Groupe" GridPane.rowIndex="8" />
+            <Label text="Groupe" GridPane.rowIndex="11" />
+            <Label text="Groupe" GridPane.rowIndex="14" />
+            <Label text="Groupe" GridPane.rowIndex="17" />
+            <Label text="Salle" GridPane.rowIndex="3" />
+            <Label text="Salle" GridPane.rowIndex="6" />
+            <Label text="Salle" GridPane.rowIndex="9" />
+            <Label text="Salle" GridPane.rowIndex="12" />
+            <Label text="Salle" GridPane.rowIndex="15" />
+            <Label text="Salle" GridPane.rowIndex="18" />
          </children>
       </GridPane>
       <Label layoutX="546.0" layoutY="35.0" text="Semaine : " />

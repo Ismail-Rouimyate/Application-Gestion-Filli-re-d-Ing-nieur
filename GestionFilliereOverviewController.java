@@ -127,6 +127,7 @@ public class GestionFilliereOverviewController {
         Filliere tempFiliere = new Filliere();
         boolean okClicked = showEditFiliere(tempFiliere);
         if (okClicked){
+            filiereTable.setItems(adminOverviewController.getFilliereData());
             filiereTable.refresh();
         }
     }

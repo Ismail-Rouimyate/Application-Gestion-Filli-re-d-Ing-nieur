@@ -162,7 +162,9 @@ public class GestionModuleOverviewController {
         boolean okClicked = showEditModule(tempModule);
         moduleTable.refresh();
         if(okClicked){
+            moduleTable.setItems(adminOverviewController.getModuleData());
             moduleTable.refresh();
+
         }
     }
 
@@ -172,18 +174,16 @@ public class GestionModuleOverviewController {
         if (selectedModule != null){
             boolean okClicked = showEditModule(selectedModule);
             if (okClicked){
+                moduleTable.setItems(adminOverviewController.getModuleData());
                 moduleTable.refresh();
                 // TODO : vérifier ici
-                gestionModuleStage.close();
-                AdminOverviewController adminOverviewController = new AdminOverviewController();
-                adminOverviewController.showGestionModule();
-                showModuleDetails(selectedModule);
+
             }
+            moduleTable.setItems(adminOverviewController.getModuleData());
             moduleTable.refresh();
             // TODO : vérifier ici
-            gestionModuleStage.close();
-            AdminOverviewController adminOverviewController = new AdminOverviewController();
-            adminOverviewController.showGestionModule();
+
+
         }
         else {
             // Nothing selected

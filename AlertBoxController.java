@@ -3,6 +3,7 @@ package sample;
 
 
 
+import javafx.event.Event;
 import javafx.stage.*;
 import javafx.scene.*;
 import javafx.scene.layout.*;
@@ -27,6 +28,8 @@ public class AlertBoxController {
 
         Button yesButton = new Button("Oui");
         Button noButton = new Button("Non");
+
+
 
         yesButton.setOnAction(e -> {
             answer = true;

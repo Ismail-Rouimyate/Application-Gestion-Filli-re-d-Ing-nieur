@@ -507,8 +507,8 @@ public class ProfOverviewController {
                 seanceStage.setScene(scene);
             }
             InfoSeanceController controller = loader.getController();
-            controller.setProfOverviewController(this, numSeance);
             controller.initialize();
+            controller.setProfOverviewController(this, numSeance);
             seanceStage.showAndWait();
         }catch (IOException e){
             //Load info Seance

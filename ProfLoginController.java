@@ -359,7 +359,7 @@ public class ProfLoginController {
                 vhtp = result.getInt("volume_horaire_tp");
                 vhap = result.getInt("volume_horaire_ap");
                 //listElem = getListeElementsForModule(Integer.toString(id_module));
-                listModule.add(new Module(id_module, intitule, vhc, vhtd, vhtp, vhap, null, null, null,null,null));
+                listModule.add(new Module(id_module, intitule, vhc, vhtd, vhtp, vhap, " ", " ", " "," "," "));
             }
             result.close();
             return listModule;
